@@ -1,0 +1,54 @@
+﻿@model IEnumerable<webThucAnNhanh.Models.ChiTietDonHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/layout/AdminLayout.cshtml";
+}
+
+@*<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaDonHang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SanPham.TenSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaDonHang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SanPham.TenSanPham)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuong)
+        </td>
+        <td>
+            @* @Html.DisplayFor(modelItem => item.DonGia)*@
+            @string.Format("{0:#,#} VND", item.DonGia)
+            
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "ChinhSuaCTDH", new { @MaDH = item.MaDonHang, @MaSanPham = item.MaSanPham }) |
+         @*   @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+            @Html.ActionLink("Xóa", "XoaCTDH", new { @MaDH = item.MaDonHang , @MaSanPham = item.MaSanPham })
+        </td>
+    </tr>
+}
+
+</table>

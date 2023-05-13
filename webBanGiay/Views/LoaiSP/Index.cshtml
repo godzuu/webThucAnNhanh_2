@@ -1,0 +1,38 @@
+﻿@model IEnumerable<webThucAnNhanh.Models.Loai>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/layout/AdminLayout.cshtml";
+}
+
+
+
+<p>
+    @Html.ActionLink("Thêm loại sản phẩm", "ThemLoaiSanPham")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaLoai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenLoai)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaLoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenLoai)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "XoaLoaiSanPham", new { @Maloai = item.MaLoai })
+        </td>
+    </tr>
+}
+
+</table>

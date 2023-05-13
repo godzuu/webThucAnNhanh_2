@@ -1,0 +1,31 @@
+﻿@using webThucAnNhanh.Models;
+<link href="~/Content/Css/bangiay.css" rel="stylesheet" />
+@model List<SanPham>
+
+@{
+    ViewBag.Title = "SanPhamTheoLoai";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<h2>@ViewBag.SanPham</h2>
+
+@{ foreach (var item in Model)
+    {
+        <div class="col4">
+            <a href="@Url.Action("XemChiTiet", new {@MaSanPham=item.MaSanPham})"><img src="@Url.Content("~/AnhSanPham/"+item.AnhSanPham)" width="490" height="500" alt=""></a>
+            <h4>@item.TenSanPham</h4>
+            <h4>Giá Tiền: @String.Format("{0:0,0}", item.GiaBan) VND</h4>
+            <div class="rating">
+
+                @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSanPham = item.MaSanPham, @strUrl = Request.Url.ToString() }))
+                {
+                    <input type="submit" style="cursor:pointer" value="Thêm vào giỏ" id="btnGiohang" class="btn btn-primary" />
+                }
+            </div>
+        </div>
+    }
+
+}

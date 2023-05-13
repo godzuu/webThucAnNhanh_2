@@ -1,0 +1,98 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@using webThucAnNhanh.Models;
+@model PagedList.IPagedList<webThucAnNhanh.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/layout/AdminLayout.cshtml";
+}
+
+<h2>Trang thêm sản phẩm</h2>
+
+<p>
+    @Html.ActionLink("Thêm sản phẩm mới", "ThemMoi")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().TenSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().GiaBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().AnhSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NgayCapNhat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().SoLuongTon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NhaSanXuat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Loai.TenLoai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Moi)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSanPham)
+            </td>
+            <td>
+                @* @Html.DisplayFor(modelItem => item.GiaBan)*@
+                @string.Format("{0:#,#} VND", item.GiaBan)
+            </td>
+            <td>
+                <img src="@Url.Content("~/AnhSanPham/"+item.AnhSanPham)" width="50" height="50" alt="">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayCapNhat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongTon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhaSanXuat.TenNSX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Loai.TenLoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Moi)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "ChinhSua", new { @MaSanPham = item.MaSanPham }) |
+                @Html.ActionLink("Details", "HienThi", new { @MaSanPham = item.MaSanPham }) |
+                @Html.ActionLink("Delete", "XoaSp", new { @MaSanPham = item.MaSanPham })
+            </td>
+        </tr>
+    }
+
+</table>
+
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
+<div class="menutrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+
+</div>
+<style>
+    .menutrang {
+        display: inline;
+    }
+</style>

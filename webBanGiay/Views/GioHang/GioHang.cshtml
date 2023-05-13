@@ -1,0 +1,68 @@
+﻿@using webThucAnNhanh.Models
+@model List<GioHang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Giỏ hàng của bạn</h2>
+<table>
+    <tr>
+        <td>Mã Sản Phẩm</td>
+
+        <td>Tên Sản Phẩm</td>
+
+        <td>Hình ảnh</td>
+
+        <td>Đơn giá</td>
+
+        <td>Số lượng</td>
+
+        <td>Thành tiền</td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.iMaSanPham</td>
+
+            <td>@item.sTenSanPham</td>
+
+            <td>
+                <a href="@Url.Action("XemChiTiet","SanPham",new {@MaSanPham = item.iMaSanPham})">
+                    <img src="@Url.Content("~/AnhSanPham/"+item.sHinhAnh)" width="50px" height="50px" alt="Anh Giay">
+                </a>
+            </td>
+
+            <td>
+                @String.Format("{0:0,0}", item.dDonGia) VNĐ
+            </td>
+
+            <td>@item.iSoLuong</td>
+
+            <td>@String.Format("{0:0,0}", item.ThanhTien) VNĐ</td>
+
+        </tr>
+
+    }
+<tr>
+    <td colspan="6" style="text-align:right;">
+        @Html.ActionLink("Chỉnh sửa giỏ hàng", "SuaGioHang")
+    </td>
+    <td>
+        <a href="@Url.Action("CreatePayment", "PayPal")" class="btn btn-success">Payment >></a>
+    </td>
+</tr>
+    <tr>
+        <td colspan="6" style="text-align:right;">
+            @using (Html.BeginForm("DatHang", "GioHang"))
+            {
+                <input type="submit" value="Đặt Hàng" />
+            }
+        </td>
+    </tr>
+</table>
+@if (TempData["CapNhatThanhCong"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["CapNhatThanhCong"]</p>
+}

@@ -1,0 +1,20 @@
+﻿@using webThucAnNhanh.Models;
+<link href="~/Content/Css/tieude.css" rel="stylesheet" />
+@model List<Loai>
+@foreach (var item in Model)
+{
+
+
+    @* <a id="headertieude"  href="@Url.Action("GiayTheoLoai", new {@MaLoai =item.MaLoai})">@item.TenLoai</a>*@
+
+    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="@Url.Action("SanPhamTheoLoai", new {@MaLoai =item.MaLoai})">@item.TenLoai</a>
+
+
+
+
+
+
+}
+
+
+

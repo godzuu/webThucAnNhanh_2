@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@if (TempData["DatHangThanhCong"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["DatHangThanhCong"]</p>
+}
